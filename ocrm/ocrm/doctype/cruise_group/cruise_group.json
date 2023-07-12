@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:cruise_group_id",
+ "creation": "2023-07-08 13:59:47.071615",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "code",
+  "static",
+  "static_small",
+  "cruise_group_id",
+  "area_id",
+  "coords",
+  "custom_area_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "cruise_group_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cruise Group Id",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "coords",
+   "fieldtype": "Long Text",
+   "label": "Coordinates"
+  },
+  {
+   "fieldname": "static",
+   "fieldtype": "Data",
+   "label": "Static"
+  },
+  {
+   "fieldname": "static_small",
+   "fieldtype": "Data",
+   "label": "Static Small"
+  },
+  {
+   "fieldname": "area_id",
+   "fieldtype": "Int",
+   "label": "Area ID"
+  },
+  {
+   "fieldname": "custom_area_id",
+   "fieldtype": "Int",
+   "label": "Custom Area ID"
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Code",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-08 16:42:14.103405",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cruise Group",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

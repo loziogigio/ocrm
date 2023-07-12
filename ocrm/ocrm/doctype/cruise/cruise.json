@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:cruise_id",
+ "creation": "2023-07-08 13:18:50.599670",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cruise_id",
+  "cruise_name",
+  "ship_id",
+  "date_start",
+  "date_end",
+  "display_name",
+  "company_id",
+  "cruise_group_id",
+  "adv",
+  "cruise_code",
+  "original_code",
+  "area_code",
+  "duration",
+  "featured",
+  "active",
+  "immediate_confirm",
+  "uuid",
+  "flights",
+  "flight_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "cruise_id",
+   "fieldtype": "Data",
+   "label": "Cruise Id",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "company_id",
+   "fieldtype": "Link",
+   "label": "Cruise Company",
+   "options": "Cruise Company"
+  },
+  {
+   "fieldname": "ship_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Ship",
+   "options": "Ship"
+  },
+  {
+   "fieldname": "cruise_group_id",
+   "fieldtype": "Link",
+   "label": "Cruise Group",
+   "options": "Cruise Group"
+  },
+  {
+   "fieldname": "display_name",
+   "fieldtype": "Data",
+   "label": "Display Name"
+  },
+  {
+   "fieldname": "adv",
+   "fieldtype": "Data",
+   "label": "Advertisement"
+  },
+  {
+   "fieldname": "date_start",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "date_end",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "End Date"
+  },
+  {
+   "fieldname": "cruise_code",
+   "fieldtype": "Data",
+   "label": "Cruise Code"
+  },
+  {
+   "fieldname": "original_code",
+   "fieldtype": "Data",
+   "label": "Original Code"
+  },
+  {
+   "fieldname": "area_code",
+   "fieldtype": "Data",
+   "label": "Area Code"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Int",
+   "label": "Duration"
+  },
+  {
+   "default": "0",
+   "fieldname": "featured",
+   "fieldtype": "Check",
+   "label": "Featured"
+  },
+  {
+   "default": "0",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active"
+  },
+  {
+   "default": "0",
+   "fieldname": "immediate_confirm",
+   "fieldtype": "Check",
+   "label": "Immediate Confirmation"
+  },
+  {
+   "fieldname": "uuid",
+   "fieldtype": "Data",
+   "label": "UUID"
+  },
+  {
+   "fieldname": "flights",
+   "fieldtype": "Long Text",
+   "label": "flights"
+  },
+  {
+   "fieldname": "flight_type",
+   "fieldtype": "Int",
+   "label": "Flight Type"
+  },
+  {
+   "fieldname": "cruise_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Cruise Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-12 08:51:57.877940",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cruise",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

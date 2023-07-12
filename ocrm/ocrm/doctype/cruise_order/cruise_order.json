@@ -1,0 +1,207 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:order_id",
+ "creation": "2023-07-12 13:25:13.395377",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "order_id",
+  "pratica",
+  "cruise_participants",
+  "participants",
+  "prices",
+  "category",
+  "flight",
+  "flight_detail",
+  "offline",
+  "is_cc",
+  "closing_details",
+  "cabin",
+  "option",
+  "history",
+  "flat",
+  "user",
+  "cruise",
+  "cabin_type_id",
+  "price_type_id",
+  "payment_rule_id",
+  "membership_id",
+  "pax_type_id",
+  "quote_id",
+  "last_price_update",
+  "uuid",
+  "order_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "order_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Cruise Order ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "pratica",
+   "fieldtype": "Data",
+   "label": "Pratica",
+   "unique": 1
+  },
+  {
+   "fieldname": "participants",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Participants"
+  },
+  {
+   "fieldname": "prices",
+   "fieldtype": "Long Text",
+   "label": "Prices"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Long Text",
+   "label": "Category"
+  },
+  {
+   "fieldname": "flight",
+   "fieldtype": "Data",
+   "label": "Flight"
+  },
+  {
+   "fieldname": "flight_detail",
+   "fieldtype": "Long Text",
+   "label": "Flight Detail "
+  },
+  {
+   "fieldname": "offline",
+   "fieldtype": "Int",
+   "label": "Offline"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_cc",
+   "fieldtype": "Check",
+   "label": "Is CC "
+  },
+  {
+   "fieldname": "closing_details",
+   "fieldtype": "Long Text",
+   "label": "Closing Details"
+  },
+  {
+   "fieldname": "cabin",
+   "fieldtype": "Int",
+   "label": "Cabin"
+  },
+  {
+   "fieldname": "option",
+   "fieldtype": "Long Text",
+   "label": "Option"
+  },
+  {
+   "fieldname": "history",
+   "fieldtype": "Long Text",
+   "label": "History"
+  },
+  {
+   "fieldname": "flat",
+   "fieldtype": "Long Text",
+   "label": "Flat"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fieldname": "cruise",
+   "fieldtype": "Link",
+   "label": "Cruise",
+   "options": "Cruise"
+  },
+  {
+   "fieldname": "cabin_type_id",
+   "fieldtype": "Int",
+   "label": "Cabin Type ID"
+  },
+  {
+   "fieldname": "price_type_id",
+   "fieldtype": "Int",
+   "label": "Price Type ID "
+  },
+  {
+   "fieldname": "payment_rule_id",
+   "fieldtype": "Int",
+   "label": "Payment Rule ID"
+  },
+  {
+   "fieldname": "membership_id",
+   "fieldtype": "Int",
+   "label": "Membership ID "
+  },
+  {
+   "fieldname": "pax_type_id",
+   "fieldtype": "Int",
+   "label": "Pax Type ID"
+  },
+  {
+   "fieldname": "quote_id",
+   "fieldtype": "Int",
+   "label": "Quote ID"
+  },
+  {
+   "fieldname": "last_price_update",
+   "fieldtype": "Datetime",
+   "label": "Last Price Update"
+  },
+  {
+   "fieldname": "uuid",
+   "fieldtype": "Data",
+   "label": "UUID"
+  },
+  {
+   "fieldname": "cruise_participants",
+   "fieldtype": "Table",
+   "label": "Cruise Participants",
+   "options": "Cruise Participant"
+  },
+  {
+   "default": "0",
+   "fieldname": "order_status",
+   "fieldtype": "Check",
+   "label": "Order Status"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-07-12 14:36:41.459562",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cruise Order",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

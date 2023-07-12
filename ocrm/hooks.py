@@ -113,23 +113,11 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-#	"all": [
-#		"ocrm.tasks.all"
-#	],
-#	"daily": [
-#		"ocrm.tasks.daily"
-#	],
-#	"hourly": [
-#		"ocrm.tasks.hourly"
-#	],
-#	"weekly": [
-#		"ocrm.tasks.weekly"
-#	],
-#	"monthly": [
-#		"ocrm.tasks.monthly"
-#	],
-# }
+scheduler_events = {
+	"daily": [
+        "ocrm.jobs.import_user_job.import_users_from_external_db_job"
+    ],
+}
 
 # Testing
 # -------

@@ -152,13 +152,20 @@ def create_cruise_company(external_company):
     short_name = external_company.short_name
     order = external_company.order
     UUID = external_company.UUID
-    
+
     try:
         # Check if the company already exists
         company = frappe.db.exists("Cruise Company", {"uuid": UUID})
         if company:
             # Fetch the company document for updating
             company = frappe.get_doc("Cruise Company", company)
+            company.company_id = company_id
+            company.name = name
+            company.short_name = short_name
+            company.order = order
+            company.uuid = UUID
+            company.save(ignore_permissions=True)
+            frappe.log_error(message=f"Successfully updated company with uuid: {UUID}", title="Company Update")
         else:
             # Create a new company document
             company = frappe.get_doc({
@@ -170,21 +177,11 @@ def create_cruise_company(external_company):
                 "uuid": UUID
             })
             company.insert(ignore_permissions=True)
-            
-        # Update company information
-        company.company_id = company_id
-        company.name = name
-        company.short_name = short_name
-        company.order = order
-        company.uuid = UUID
-        company.save(ignore_permissions=True)
-
-        # Log the successful creation or update
-        frappe.log_error(message=f"Successfully created or updated company with uuid: {uuid}", title="Company Creation/Update")
+            frappe.log_error(message=f"Successfully created company with uuid: {UUID}", title="Company Creation")
 
     except Exception as e:
         # Log the error
-        frappe.log_error(message=f"An error occurred while creating or updating company with uuid {uuid}: {str(e)}", title="Company Creation/Update Error")
+        frappe.log_error(message=f"An error occurred while creating or updating company with uuid {UUID}: {str(e)}", title="Company Creation/Update Error")
 
 
 @frappe.whitelist(allow_guest=True, methods=['POST'])

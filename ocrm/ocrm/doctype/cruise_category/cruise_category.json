@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-21 13:49:24.056710",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cabin_no",
+  "deck_code",
+  "deck_name",
+  "physically_challenged",
+  "bed_arrangement",
+  "ship_location_description",
+  "obview"
+ ],
+ "fields": [
+  {
+   "fieldname": "cabin_no",
+   "fieldtype": "Data",
+   "label": "Cabin No"
+  },
+  {
+   "fieldname": "deck_code",
+   "fieldtype": "Data",
+   "label": "Deck Code"
+  },
+  {
+   "fieldname": "deck_name",
+   "fieldtype": "Data",
+   "label": "Deck Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "physically_challenged",
+   "fieldtype": "Check",
+   "label": "Physically Challenged"
+  },
+  {
+   "fieldname": "bed_arrangement",
+   "fieldtype": "Data",
+   "label": "Bed Arrangement"
+  },
+  {
+   "fieldname": "ship_location_description",
+   "fieldtype": "Data",
+   "label": "Ship Location Description"
+  },
+  {
+   "default": "0",
+   "fieldname": "obview",
+   "fieldtype": "Check",
+   "label": "Obview"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-21 13:53:02.653607",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cruise Category",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

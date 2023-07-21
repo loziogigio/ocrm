@@ -33,7 +33,8 @@
   "quote_id",
   "last_price_update",
   "uuid",
-  "order_status"
+  "order_status",
+  "cruise_categories"
  ],
  "fields": [
   {
@@ -177,11 +178,17 @@
    "fieldname": "order_status",
    "fieldtype": "Check",
    "label": "Order Status"
+  },
+  {
+   "fieldname": "cruise_categories",
+   "fieldtype": "Table",
+   "label": "Cruise Categories",
+   "options": "Cruise Category"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-12 14:36:41.459562",
+ "modified": "2023-07-21 16:06:03.664937",
  "modified_by": "Administrator",
  "module": "Ocrm",
  "name": "Cruise Order",

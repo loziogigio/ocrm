@@ -720,6 +720,8 @@ def create_order(external_order):
         #add participants
         add_cruise_participants(order, participants)
 
+        add_cruise_categories(order, category)
+
         # Log the successful creation or update
         frappe.log_error(message=f"Successfully created or updated order with id: {order_id}", title="Cruise Order Creation/Update")
 
@@ -778,6 +780,34 @@ def add_cruise_participants(order, participants):
             frappe.log_error(message=f"An error occurred while creating/updating a participant: {str(e)}", title="Cruise Participant Creation/Update Error")
 
     # Save the order with the updated participants
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
+
+def add_cruise_categories(order, categories):
+    # Deserialize the categories information
+    categories = phpserialize.loads(categories.encode('utf-8'), decode_strings=True)
+    try:
+        print(f"Processing categories: {categories}")
+        print(f"Processing categories: {categories['CabinNo']}")
+        print(f"Processing categories: {categories['DeckCode']}")
+        print(f"Processing categories: {categories['DeckName']}")
+        order.append('cruise_categories', {
+            "cabin_no": categories['CabinNo'],   # Assuming 'name' is the correct key in your category data
+            "deck_code": categories['DeckCode'],
+            "deck_name": categories['DeckName'],
+            "physically_challenged": True,
+            "bed_arrangement": categories['BedArrangement'],
+            "ship_location_description": categories['ShipLocationDesc'],
+            "obview": True,
+        })
+
+    except Exception as e:
+        # Log the error
+        frappe.log_error(message=f"An error occurred while creating/updating a Category: {str(e)}", title="Cruise Category Creation/Update Error")
+
+    # Save the order with the updated categories
     order.save(ignore_permissions=True)
     # Commit the transaction
     frappe.db.commit()

@@ -1,4 +1,3 @@
-import phpserialize
 import frappe
 from ocrm.repository.AddressReposiotory import AddressRepository
 from ocrm.repository.AreaReposiotory import AreaRepository
@@ -8,13 +7,11 @@ from ocrm.repository.PortRepository import PortRepository
 from ocrm.repository.ShipRepository import ShipRepository
 from ocrm.repository.CruiseGroupRepository import CruiseGroupRepository
 from ocrm.repository.CruiseRepository import CruiseRepository
-from datetime import datetime
-
 
 from frappe.utils.password import update_password
 from ocrm.model.Company import Company
 from mymb_ecommerce.mymb_ecommerce.order import _create_address
-
+from ocrm.services.cruise_service import add_cruise_categories, add_cruise_participants, add_cruise_closing_details
 
 @frappe.whitelist(allow_guest=True, methods=['GET'])
 def get_cruises_from_external_db(limit=20, time_laps=None):
@@ -720,7 +717,11 @@ def create_order(external_order):
         #add participants
         add_cruise_participants(order, participants)
 
+        # add cruise categories
         add_cruise_categories(order, category)
+
+        # add cruise closing details
+        add_cruise_closing_details(order, closing_details)
 
         # Log the successful creation or update
         frappe.log_error(message=f"Successfully created or updated order with id: {order_id}", title="Cruise Order Creation/Update")
@@ -730,84 +731,3 @@ def create_order(external_order):
     except Exception as e:
         # Log the error
         frappe.log_error(message=f"An error occurred while creating or updating order with id {order_id}: {str(e)}", title="Cruise Order  Creation/Update Error")
-
-def add_cruise_participants(order, participants):
-    """
-    Function to deserialize and add participants to the cruise order.
-    
-    Args:
-    order (frappe.model.document.Document): The Cruise Order document.
-    participants (str): Serialized participants data.
-    """
-    # Deserialize the participants information
-    participants = phpserialize.loads(participants.encode('utf-8'), decode_strings=True)
-
-    # For each participant in the deserialized list, update or create a Cruise Participant document
-    for participant in participants.values():
-        try:
-            # Convert 'birth' from 'DD/MM/YYYY' to 'YYYY-MM-DD'
-            birth = datetime.strptime(participant['birth'], '%d/%m/%Y').strftime('%Y-%m-%d')
-            
-            print(f"Processing participant: {participant}")  # Print participant data
-
-            # Check if the participant already exists
-            existing_participant = None
-            for p in order.get('cruise_participants'):
-                if p.first_name == participant['name'] and p.surname == participant['surname'] and p.age == int(participant['age']):
-                    existing_participant = p
-                    break
-
-            if existing_participant is not None:
-                # Update the existing participant
-                existing_participant.update({
-                    "nationality": participant['nationality'],
-                    "birth": birth,
-                    "type": participant['type'],
-                })
-            else:
-                # Add a new participant
-                order.append('cruise_participants', {
-                    "first_name": participant['name'],   # Assuming 'name' is the correct key in your participant data
-                    "surname": participant['surname'],
-                    "age": participant['age'],
-                    "nationality": participant['nationality'],
-                    "birth": birth,
-                    "type": participant['type'],
-                })
-
-        except Exception as e:
-            # Log the error
-            frappe.log_error(message=f"An error occurred while creating/updating a participant: {str(e)}", title="Cruise Participant Creation/Update Error")
-
-    # Save the order with the updated participants
-    order.save(ignore_permissions=True)
-    # Commit the transaction
-    frappe.db.commit()
-
-
-def add_cruise_categories(order, categories):
-    # Deserialize the categories information
-    categories = phpserialize.loads(categories.encode('utf-8'), decode_strings=True)
-    try:
-        print(f"Processing categories: {categories}")
-        print(f"Processing categories: {categories['CabinNo']}")
-        print(f"Processing categories: {categories['DeckCode']}")
-        print(f"Processing categories: {categories['DeckName']}")
-        order.append('cruise_categories', {
-            "cabin_no": categories['CabinNo'],   # Assuming 'name' is the correct key in your category data
-            "deck_code": categories['DeckCode'],
-            "deck_name": categories['DeckName'],
-            "physically_challenged": True,
-            "bed_arrangement": categories['BedArrangement'],
-            "ship_location_description": categories['ShipLocationDesc'],
-            "obview": True,
-        })
-
-    except Exception as e:
-        # Log the error
-        frappe.log_error(message=f"An error occurred while creating/updating a Category: {str(e)}", title="Cruise Category Creation/Update Error")
-
-    # Save the order with the updated categories
-    order.save(ignore_permissions=True)
-    # Commit the transaction
-    frappe.db.commit()

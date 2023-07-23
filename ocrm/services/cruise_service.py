@@ -1,5 +1,6 @@
 import phpserialize
 import frappe
+import json
 from datetime import datetime
 
 
@@ -96,6 +97,65 @@ def add_cruise_categories(order, categories):
         frappe.log_error(message=f"An error occurred while creating/updating a Category: {str(e)}", title="Cruise Category Creation/Update Error")
 
     # Save the order with the updated categories
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
+def add_cruise_closing_details(order, details):
+    # Deserialize the details information
+    details = phpserialize.loads(details.encode('utf-8'), decode_strings=True)
+    print(f"Processing details: {details}")  # Print participant data
+
+    try:
+        # Check if the detail already exists
+        existing_detail = None
+        for c in order.get('cruise_closing_details'):
+                if c.number_of_adults == details['num_adult']:
+                    existing_detail = c
+                    break
+        
+        # Preprocess the complex dictionary fields
+        details['cruise_adults'] = json.dumps(details['cruise_adults'])
+        details['cruise_childs'] = json.dumps(details['cruise_childs'])
+        details['tax'] = json.dumps(details['tax'])
+        details['insurance'] = json.dumps(details['insurance'])
+        details['benefits'] = json.dumps(details['benefits'])
+
+        if existing_detail is not None:
+            print(f"existing_details: {existing_detail}")
+            # Update the existing detail
+            existing_detail.update({
+                "number_of_adults": details['num_adult'],   # Assuming 'num_adult' is the correct key in your detail data
+                "number_of_children": details['num_child'],
+                "cruise_adults": details['cruise_adults'],
+                "cruise_children": details['cruise_childs'],
+                "tax": details['tax'],
+                "insurance": details['insurance'],
+                "total": details['total'],
+                "discount": details['discount'],
+                "benefits": details['benefits'],
+                "grand_total": details['grand_total'],
+            })
+        else:
+            # Add a new participant
+            order.append('cruise_closing_details', {
+                "number_of_adults": details['num_adult'],   # Assuming 'num_adult' is the correct key in your detail data
+                "number_of_children": details['num_child'],
+                "cruise_adults": details['cruise_adults'],
+                "cruise_children": details['cruise_childs'],
+                "tax": details['tax'],
+                "insurance": details['insurance'],
+                "total": details['total'],
+                "discount": details['discount'],
+                "benefits": details['benefits'],
+                "grand_total": details['grand_total'],
+            })
+
+    except Exception as e:
+        # Log the error
+        frappe.log_error(message=f"An error occurred while creating/updating a Closing Detail: {str(e)}", title="Cruise Closing Detail Creation/Update Error")
+
+    # Save the order with the updated details
     order.save(ignore_permissions=True)
     # Commit the transaction
     frappe.db.commit()

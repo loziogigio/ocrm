@@ -34,7 +34,8 @@
   "last_price_update",
   "uuid",
   "order_status",
-  "cruise_categories"
+  "cruise_categories",
+  "cruise_closing_details"
  ],
  "fields": [
   {
@@ -184,11 +185,17 @@
    "fieldtype": "Table",
    "label": "Cruise Categories",
    "options": "Cruise Category"
+  },
+  {
+   "fieldname": "cruise_closing_details",
+   "fieldtype": "Table",
+   "label": "Cruise Closing Details",
+   "options": "Cruise Closing Detail"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-21 16:06:03.664937",
+ "modified": "2023-07-23 21:34:55.500168",
  "modified_by": "Administrator",
  "module": "Ocrm",
  "name": "Cruise Order",

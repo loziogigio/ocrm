@@ -167,6 +167,7 @@ def add_cruise_histories(order, histories):
 
     # For each history in the deserialized list, update or create a Cruise History document
     for history in histories.values():
+        # cruise_history_id_seq = history['msg']
         try:
             print(f"Processing history: {history}")  # Print history data
 
@@ -187,7 +188,7 @@ def add_cruise_histories(order, histories):
                 # Add a new history
                 order.append('cruise_histories', {
                     "date": convert_date(history['date']),
-                    "message": 'message test',
+                    "message": history['msg'],
                 })
             print(f"Result history: {convert_date(history['date'])}")
         except Exception as e:
@@ -314,6 +315,43 @@ def add_cruise_options(order, options):
                 "booking_context": json.dumps(options['BookingContext']),
                 "advisory_info": json.dumps(options['AdvisoryInfo']),
                 "booking_info": json.dumps(options['BookingInfo']),
+            })
+    except Exception as e:
+        # Log the error
+        frappe.log_error(message=f"An error occurred while creating/updating a option: {str(e)}", title="Cruise option Creation/Update Error")
+
+    # Save the order with the updated options
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
+def add_cruise_prices(order, prices):
+    # Deserialize the prices information
+    prices = phpserialize.loads(prices.encode('utf-8'), decode_strings=True)
+    print(f"Processing prices: {prices}")  # Print Processing details data
+
+    # For each history in the deserialized list, update or create a Cruise History document
+    try:
+        # Check if the price already exists
+        existing_price = None
+        for o in order.get('cruise_prices'):
+            if o.promotion_code == prices['promotionCode']:
+                existing_price = o
+                break
+
+        if existing_price is not None:
+            # Update the existing price
+            existing_price.update({
+                "promotion_code": prices['promotionCode'],
+                "cabin_details": json.dumps(prices['cabin']),
+                "flight_details": json.dumps(prices['flight']),
+            })
+        else:
+            # Add a new price
+            order.append('cruise_prices', {
+                "promotion_code": prices['promotionCode'],
+                "cabin_details": json.dumps(prices['cabin']),
+                "flight_details": json.dumps(prices['flight']),
             })
     except Exception as e:
         # Log the error

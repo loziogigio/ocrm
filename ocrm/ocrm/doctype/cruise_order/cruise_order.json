@@ -11,11 +11,12 @@
   "order_id",
   "pratica",
   "cruise_participants",
+  "cruise_histories",
   "cruise_categories",
   "cruise_closing_details",
   "cruise_flats",
   "cruise_options",
-  "cruise_histories",
+  "cruise_prices",
   "participants",
   "prices",
   "category",
@@ -64,6 +65,7 @@
   {
    "fieldname": "prices",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Prices"
   },
   {
@@ -107,6 +109,7 @@
   {
    "fieldname": "option",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Option"
   },
   {
@@ -117,6 +120,7 @@
   {
    "fieldname": "flat",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Flat"
   },
   {
@@ -198,12 +202,6 @@
    "options": "Cruise Closing Detail"
   },
   {
-   "fieldname": "cruise_histories",
-   "fieldtype": "Table",
-   "label": "Cruise Histories",
-   "options": "Cruise History"
-  },
-  {
    "fieldname": "cruise_flats",
    "fieldtype": "Table",
    "label": "Cruise Flats",
@@ -214,11 +212,23 @@
    "fieldtype": "Table",
    "label": "Cruise Options",
    "options": "Cruise Option"
+  },
+  {
+   "fieldname": "cruise_prices",
+   "fieldtype": "Table",
+   "label": "Cruise Prices",
+   "options": "Cruise Price"
+  },
+  {
+   "fieldname": "cruise_histories",
+   "fieldtype": "Table",
+   "label": "Cruise Histories",
+   "options": "Cruise History"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-25 15:44:21.935936",
+ "modified": "2023-07-25 17:11:45.119817",
  "modified_by": "Administrator",
  "module": "Ocrm",
  "name": "Cruise Order",

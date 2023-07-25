@@ -11,7 +11,7 @@ from ocrm.repository.CruiseRepository import CruiseRepository
 from frappe.utils.password import update_password
 from ocrm.model.Company import Company
 from mymb_ecommerce.mymb_ecommerce.order import _create_address
-from ocrm.services.cruise_service import add_cruise_categories, add_cruise_participants, add_cruise_closing_details, add_cruise_histories, add_cruise_flats
+from ocrm.services.cruise_service import add_cruise_categories, add_cruise_participants, add_cruise_closing_details, add_cruise_histories, add_cruise_flats, add_cruise_options
 
 @frappe.whitelist(allow_guest=True, methods=['GET'])
 def get_cruises_from_external_db(limit=20, time_laps=None):
@@ -723,9 +723,15 @@ def create_order(external_order):
         # add cruise closing details
         add_cruise_closing_details(order, closing_details)
 
+        # add cruise flat
         add_cruise_flats(order, flat)
-        # add cruise histories
-        add_cruise_histories(order, history)
+
+        # add cruise options
+        add_cruise_options(order, option)
+
+
+        # TODO: fix add cruise histories (An error occurred while creating or updating order with id 1580: (4091, "Unknown SEQUENCE: 'cruise_history_id_seq'"))
+        # add_cruise_histories(order, history)
 
 
         # Log the successful creation or update

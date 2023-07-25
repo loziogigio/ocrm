@@ -11,9 +11,11 @@
   "order_id",
   "pratica",
   "cruise_participants",
-  "cruise_histories",
   "cruise_categories",
   "cruise_closing_details",
+  "cruise_flats",
+  "cruise_options",
+  "cruise_histories",
   "participants",
   "prices",
   "category",
@@ -36,8 +38,7 @@
   "quote_id",
   "last_price_update",
   "uuid",
-  "order_status",
-  "cruise_flats"
+  "order_status"
  ],
  "fields": [
   {
@@ -57,6 +58,7 @@
   {
    "fieldname": "participants",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Participants"
   },
   {
@@ -67,6 +69,7 @@
   {
    "fieldname": "category",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Category"
   },
   {
@@ -205,11 +208,17 @@
    "fieldtype": "Table",
    "label": "Cruise Flats",
    "options": "Cruise Flat"
+  },
+  {
+   "fieldname": "cruise_options",
+   "fieldtype": "Table",
+   "label": "Cruise Options",
+   "options": "Cruise Option"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-25 07:44:06.139734",
+ "modified": "2023-07-25 15:44:21.935936",
  "modified_by": "Administrator",
  "module": "Ocrm",
  "name": "Cruise Order",

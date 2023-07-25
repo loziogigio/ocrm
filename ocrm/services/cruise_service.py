@@ -173,23 +173,23 @@ def add_cruise_histories(order, histories):
             # Check if the history already exists
             existing_history = None
             for h in order.get('cruise_histories'):
-                if h.date == history['date'] and h.message == history['msg']:
+                if h.date == convert_date(history['date']) and h.message == history['msg']:
                     existing_history = h
                     break
 
             if existing_history is not None:
                 # Update the existing history
                 existing_history.update({
-                    "date": history['date'],
+                    "date": convert_date(history['date']),
                     "message": history['msg'],
                 })
             else:
                 # Add a new history
                 order.append('cruise_histories', {
-                    "date": history['date'],
-                    "message": history['msg'],
+                    "date": convert_date(history['date']),
+                    "message": 'message test',
                 })
-            print(f"Result history: {order.get('cruise_histories')}")
+            print(f"Result history: {convert_date(history['date'])}")
         except Exception as e:
             # Log the error
             frappe.log_error(message=f"An error occurred while creating/updating a History: {str(e)}", title="Cruise History Creation/Update Error")
@@ -278,7 +278,48 @@ def add_cruise_flats(order, flats):
         # Log the error
         frappe.log_error(message=f"An error occurred while creating/updating a flat: {str(e)}", title="Cruise flat Creation/Update Error")
 
-    # Save the order with the updated histories
+    # Save the order with the updated flats
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
+def add_cruise_options(order, options):
+    # Deserialize the options information
+    options = phpserialize.loads(options.encode('utf-8'), decode_strings=True)
+    print(f"Processing options: {options}")  # Print Processing details data
+
+    # For each history in the deserialized list, update or create a Cruise History document
+    try:
+        # Check if the option already exists
+        existing_option = None
+        for o in order.get('cruise_options'):
+            if o.session_id == options['SessionInfo']['SessionID']:
+                existing_option = o
+                break
+
+        if existing_option is not None:
+            # Update the existing option
+            existing_option.update({
+                "session_id": options['SessionInfo']['SessionID'],
+                "session_info": json.dumps(options['SessionInfo']),
+                "booking_context": json.dumps(options['BookingContext']),
+                "advisory_info": json.dumps(options['AdvisoryInfo']),
+                "booking_info": json.dumps(options['BookingInfo']),
+            })
+        else:
+            # Add a new option
+            order.append('cruise_options', {
+                "session_id": options['SessionInfo']['SessionID'],
+                "session_info": json.dumps(options['SessionInfo']),
+                "booking_context": json.dumps(options['BookingContext']),
+                "advisory_info": json.dumps(options['AdvisoryInfo']),
+                "booking_info": json.dumps(options['BookingInfo']),
+            })
+    except Exception as e:
+        # Log the error
+        frappe.log_error(message=f"An error occurred while creating/updating a option: {str(e)}", title="Cruise option Creation/Update Error")
+
+    # Save the order with the updated options
     order.save(ignore_permissions=True)
     # Commit the transaction
     frappe.db.commit()

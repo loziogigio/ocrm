@@ -104,7 +104,7 @@ def add_cruise_categories(order, categories):
 def add_cruise_closing_details(order, details):
     # Deserialize the details information
     details = phpserialize.loads(details.encode('utf-8'), decode_strings=True)
-    print(f"Processing details: {details}")  # Print participant data
+    print(f"Processing details: {details}")  # Print Processing details data
 
     try:
         # Check if the detail already exists
@@ -159,3 +159,130 @@ def add_cruise_closing_details(order, details):
     order.save(ignore_permissions=True)
     # Commit the transaction
     frappe.db.commit()
+
+def add_cruise_histories(order, histories):
+    # Deserialize the histories information
+    histories = phpserialize.loads(histories.encode('utf-8'), decode_strings=True)
+    print(f"Processing histories: {histories}")  # Print Processing details data
+
+    # For each history in the deserialized list, update or create a Cruise History document
+    for history in histories.values():
+        try:
+            print(f"Processing history: {history}")  # Print history data
+
+            # Check if the history already exists
+            existing_history = None
+            for h in order.get('cruise_histories'):
+                if h.date == history['date'] and h.message == history['msg']:
+                    existing_history = h
+                    break
+
+            if existing_history is not None:
+                # Update the existing history
+                existing_history.update({
+                    "date": history['date'],
+                    "message": history['msg'],
+                })
+            else:
+                # Add a new history
+                order.append('cruise_histories', {
+                    "date": history['date'],
+                    "message": history['msg'],
+                })
+            print(f"Result history: {order.get('cruise_histories')}")
+        except Exception as e:
+            # Log the error
+            frappe.log_error(message=f"An error occurred while creating/updating a History: {str(e)}", title="Cruise History Creation/Update Error")
+
+    # Save the order with the updated histories
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
+
+def add_cruise_flats(order, flats):
+    # Deserialize the flats information
+    flats = phpserialize.loads(flats.encode('utf-8'), decode_strings=True)
+    print(f"Processing flats: {flats}")  # Print Processing details data
+
+    # For each history in the deserialized list, update or create a Cruise History document
+    try:
+        # Check if the flat already exists
+        existing_flat = None
+        for f in order.get('cruise_flats'):
+            if f.cruise_id == flats['uuid_crociera']:
+                existing_flat = f
+                break
+
+        if existing_flat is not None:
+            # Update the existing flat
+            existing_flat.update({
+                "cruise_name": flats['nome_crociera'],
+                "cruise_id": flats['uuid_crociera'],
+                "status": flats['stato'],
+                "departure_date": convert_date(flats['data_partenza']),
+                "return_date": convert_date(flats['data_ritorno']),
+                "departure_port": flats['porto_partenza'],
+                "arrival_port": flats['porto_arrivo'],
+                "issue_date": convert_date(flats['emissione']),
+                "requestor": flats['richiedente'],
+                "phone": flats['telefono'],
+                "email": flats['email'],
+                "quote_code": flats['cod_preventivo'],
+                "booking_code": flats['cod_prenotazione'],
+                "consultant": flats['consulente'],
+                "cruise_company": flats['compagnia'],
+                "ship_name": flats['nave'],
+                "cabin_booking": flats['prenotazione_cabina'],
+                "cabin_type": flats['tipo_cabina'],
+                "pricing_list": flats['listino'],
+                "pricing_includes": flats['listino_comprende'],
+                "pricing_does_not_include": flats['listino_non_comprende'],
+                "participants": json.dumps(flats['partecipanti']),
+                "prices": json.dumps(flats['prezzi']),
+                "deposits": json.dumps(flats['acconti']),
+                "cabin_number": flats['cabinNumber'],
+                "booking_number": flats['bookingNumber'],
+            })
+        else:
+            # Add a new flat
+            order.append('cruise_flats', {
+                "cruise_name": flats['nome_crociera'],
+                "cruise_id": flats['uuid_crociera'],
+                "status": flats['stato'],
+                "departure_date": convert_date(flats['data_partenza']),
+                "return_date": convert_date(flats['data_ritorno']),
+                "departure_port": flats['porto_partenza'],
+                "arrival_port": flats['porto_arrivo'],
+                "issue_date": convert_date(flats['emissione']),
+                "requestor": flats['richiedente'],
+                "phone": flats['telefono'],
+                "email": flats['email'],
+                "quote_code": flats['cod_preventivo'],
+                "booking_code": flats['cod_prenotazione'],
+                "consultant": flats['consulente'],
+                "cruise_company": flats['compagnia'],
+                "ship_name": flats['nave'],
+                "cabin_booking": flats['prenotazione_cabina'],
+                "cabin_type": flats['tipo_cabina'],
+                "pricing_list": flats['listino'],
+                "pricing_includes": flats['listino_comprende'],
+                "pricing_does_not_include": flats['listino_non_comprende'],
+                "participants": json.dumps(flats['partecipanti']),
+                "prices": json.dumps(flats['prezzi']),
+                "deposits": json.dumps(flats['acconti']),
+                "cabin_number": flats['cabinNumber'],
+                "booking_number": flats['bookingNumber'],
+            })
+    except Exception as e:
+        # Log the error
+        frappe.log_error(message=f"An error occurred while creating/updating a flat: {str(e)}", title="Cruise flat Creation/Update Error")
+
+    # Save the order with the updated histories
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
+def convert_date(date):
+    return datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')
+

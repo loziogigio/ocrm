@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-25 07:39:08.933092",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cruise_name",
+  "cruise_id",
+  "status",
+  "departure_date",
+  "return_date",
+  "departure_port",
+  "arrival_port",
+  "issue_date",
+  "requestor",
+  "phone",
+  "email",
+  "quote_code",
+  "booking_code",
+  "consultant",
+  "cruise_company",
+  "ship_name",
+  "cabin_booking",
+  "cabin_type",
+  "pricing_list",
+  "pricing_includes",
+  "pricing_does_not_include",
+  "participants",
+  "prices",
+  "deposits",
+  "cabin_number",
+  "booking_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date"
+  },
+  {
+   "fieldname": "return_date",
+   "fieldtype": "Date",
+   "label": "Return Date"
+  },
+  {
+   "fieldname": "departure_port",
+   "fieldtype": "Data",
+   "label": "Departure Port"
+  },
+  {
+   "fieldname": "arrival_port",
+   "fieldtype": "Data",
+   "label": "Arrival Port"
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date"
+  },
+  {
+   "fieldname": "requestor",
+   "fieldtype": "Data",
+   "label": "Requestor"
+  },
+  {
+   "fieldname": "cruise_name",
+   "fieldtype": "Data",
+   "label": "Cruise Name"
+  },
+  {
+   "fieldname": "cruise_id",
+   "fieldtype": "Data",
+   "label": "Cruise ID"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "quote_code",
+   "fieldtype": "Int",
+   "label": "Quote Code"
+  },
+  {
+   "fieldname": "booking_code",
+   "fieldtype": "Int",
+   "label": "Booking Code"
+  },
+  {
+   "fieldname": "consultant",
+   "fieldtype": "Data",
+   "label": "Consultant"
+  },
+  {
+   "fieldname": "cruise_company",
+   "fieldtype": "Data",
+   "label": "Cruise Company"
+  },
+  {
+   "fieldname": "ship_name",
+   "fieldtype": "Data",
+   "label": "Ship Name"
+  },
+  {
+   "fieldname": "cabin_booking",
+   "fieldtype": "Int",
+   "label": "Cabin Booking"
+  },
+  {
+   "fieldname": "cabin_type",
+   "fieldtype": "Data",
+   "label": "Cabin Type"
+  },
+  {
+   "fieldname": "pricing_list",
+   "fieldtype": "Data",
+   "label": "Pricing List"
+  },
+  {
+   "fieldname": "pricing_includes",
+   "fieldtype": "Long Text",
+   "label": "Pricing Includes"
+  },
+  {
+   "fieldname": "pricing_does_not_include",
+   "fieldtype": "Long Text",
+   "label": "Pricing Does Not Include"
+  },
+  {
+   "fieldname": "participants",
+   "fieldtype": "Long Text",
+   "label": "Participants"
+  },
+  {
+   "fieldname": "prices",
+   "fieldtype": "Long Text",
+   "label": "Prices"
+  },
+  {
+   "fieldname": "deposits",
+   "fieldtype": "Long Text",
+   "label": "Deposits"
+  },
+  {
+   "fieldname": "cabin_number",
+   "fieldtype": "Int",
+   "label": "Cabin Number"
+  },
+  {
+   "fieldname": "booking_number",
+   "fieldtype": "Data",
+   "label": "Booking Number"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-25 08:39:03.266089",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cruise Flat",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

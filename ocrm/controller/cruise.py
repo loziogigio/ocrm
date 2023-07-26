@@ -732,7 +732,7 @@ def create_order(external_order):
         # add cruise prices
         add_cruise_prices(order, prices)
 
-        # TODO: fix add cruise histories (An error occurred while creating or updating order with id 1580: (4091, "Unknown SEQUENCE: 'cruise_history_id_seq'"))
+        # add cruise histories
         add_cruise_histories(order, history)
 
         # Log the successful creation or update

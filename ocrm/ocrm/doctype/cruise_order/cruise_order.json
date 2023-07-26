@@ -115,6 +115,7 @@
   {
    "fieldname": "history",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "History"
   },
   {
@@ -228,7 +229,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-25 17:11:45.119817",
+ "modified": "2023-07-25 18:41:15.232113",
  "modified_by": "Administrator",
  "module": "Ocrm",
  "name": "Cruise Order",

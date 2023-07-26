@@ -72,7 +72,7 @@ def add_cruise_categories(order, categories):
         if existing_category is not None:
             # Update the existing category
             existing_category.update({
-                "cabin_no": categories['CabinNo'],   # Assuming 'name' is the correct key in your category data
+                "cabin_no": categories['CabinNo'], 
                 "deck_code": categories['DeckCode'],
                 "deck_name": categories['DeckName'],
                 "physically_challenged": True,
@@ -83,7 +83,7 @@ def add_cruise_categories(order, categories):
         else:
             # Add a new participant
             order.append('cruise_categories', {
-                "cabin_no": categories['CabinNo'],   # Assuming 'name' is the correct key in your category data
+                "cabin_no": categories['CabinNo'],   # Assuming 'CabinNo' is the correct key in your category data
                 "deck_code": categories['DeckCode'],
                 "deck_name": categories['DeckName'],
                 "physically_challenged": True,

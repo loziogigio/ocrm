@@ -167,14 +167,13 @@ def add_cruise_histories(order, histories):
 
     # For each history in the deserialized list, update or create a Cruise History document
     for history in histories.values():
-        # cruise_history_id_seq = history['msg']
         try:
             print(f"Processing history: {history}")  # Print history data
 
             # Check if the history already exists
             existing_history = None
             for h in order.get('cruise_histories'):
-                if h.date == convert_date(history['date']) and h.message == history['msg']:
+                if h.message == history['msg']:
                     existing_history = h
                     break
 
@@ -190,7 +189,7 @@ def add_cruise_histories(order, histories):
                     "date": convert_date(history['date']),
                     "message": history['msg'],
                 })
-            print(f"Result history: {convert_date(history['date'])}")
+            
         except Exception as e:
             # Log the error
             frappe.log_error(message=f"An error occurred while creating/updating a History: {str(e)}", title="Cruise History Creation/Update Error")
@@ -289,7 +288,7 @@ def add_cruise_options(order, options):
     options = phpserialize.loads(options.encode('utf-8'), decode_strings=True)
     print(f"Processing options: {options}")  # Print Processing details data
 
-    # For each history in the deserialized list, update or create a Cruise History document
+    # For each Option in the deserialized list, update or create a Cruise History document
     try:
         # Check if the option already exists
         existing_option = None
@@ -330,7 +329,7 @@ def add_cruise_prices(order, prices):
     prices = phpserialize.loads(prices.encode('utf-8'), decode_strings=True)
     print(f"Processing prices: {prices}")  # Print Processing details data
 
-    # For each history in the deserialized list, update or create a Cruise History document
+    # For each price in the deserialized list, update or create a Cruise History document
     try:
         # Check if the price already exists
         existing_price = None
@@ -361,6 +360,76 @@ def add_cruise_prices(order, prices):
     order.save(ignore_permissions=True)
     # Commit the transaction
     frappe.db.commit()
+
+def add_cruise_flight_details(order, flight_details):
+    # Deserialize the flight_details information
+    flight_details = phpserialize.loads(flight_details.encode('utf-8'), decode_strings=True)
+    print(f"Processing flight_details: {flight_details}")  # Print Processing details data
+
+    # For each flight_detail in the deserialized list, update or create a Cruise History document
+    for flight_detail in flight_details.values():
+        try:
+            print(f"Processing flight_detail: {flight_detail}")  # Print flight_detail data
+
+            # Check if the flight_detail already exists
+            existing_flight_detail = None
+            for f in order.get('cruise_flight_details'):
+                if f.flight_number == flight_detail['FlightNumber'] and f.flight_leg_number == flight_detail['FlightLegNo'] and f.to_airport_code == flight_detail['ToAirportCode']:
+                    existing_flight_detail = f
+                    break
+
+            if existing_flight_detail is not None:
+                # Update the existing flight_detail
+                existing_flight_detail.update({
+                    "flight_leg_number": flight_detail['FlightLegNo'],
+                    "flight_segment_number": flight_detail['FlightSegmentNo'],
+                    "departure_date": flight_detail['DepartDate'],
+                    "from_airport_code": flight_detail['FromAirportCode'],
+                    "from_airport_name": flight_detail['FromAirportName'],
+                    "departure_time": flight_detail['DepartTime'],
+                    "to_airport_code": flight_detail['ToAirportCode'],
+                    "to_airport_name": flight_detail['ToAirportName'],
+                    "arrival_date": flight_detail['ArriveDate'],
+                    "arrival_time": flight_detail['ArriveTime'],
+                    "airline_code": flight_detail['AirlineCode'],
+                    "airline_name": flight_detail['AirlineName'],
+                    "flight_number": flight_detail['FlightNumber'],
+                    "fare_class_code": flight_detail['FareClassCode'],
+                    "cabin_class_description": flight_detail['CabinClassDescription'],
+                    "flight_stop": flight_detail['FlightStop'],
+                    "flight_type": flight_detail['FlightType'],
+                })
+            else:
+                # Add a new flight_detail
+                order.append('cruise_flight_details', {
+                    "flight_leg_number": flight_detail['FlightLegNo'],
+                    "flight_segment_number": flight_detail['FlightSegmentNo'],
+                    "departure_date": flight_detail['DepartDate'],
+                    "from_airport_code": flight_detail['FromAirportCode'],
+                    "from_airport_name": flight_detail['FromAirportName'],
+                    "departure_time": flight_detail['DepartTime'],
+                    "to_airport_code": flight_detail['ToAirportCode'],
+                    "to_airport_name": flight_detail['ToAirportName'],
+                    "arrival_date": flight_detail['ArriveDate'],
+                    "arrival_time": flight_detail['ArriveTime'],
+                    "airline_code": flight_detail['AirlineCode'],
+                    "airline_name": flight_detail['AirlineName'],
+                    "flight_number": flight_detail['FlightNumber'],
+                    "fare_class_code": flight_detail['FareClassCode'],
+                    "cabin_class_description": flight_detail['CabinClassDescription'],
+                    "flight_stop": flight_detail['FlightStop'],
+                    "flight_type": flight_detail['FlightType'],
+                })
+            
+        except Exception as e:
+            # Log the error
+            frappe.log_error(message=f"An error occurred while creating/updating Flight Details: {str(e)}", title="Cruise Flight Detail Creation/Update Error")
+
+    # Save the order with the updated flight_details
+    order.save(ignore_permissions=True)
+    # Commit the transaction
+    frappe.db.commit()
+
 
 def convert_date(date):
     return datetime.strptime(date, '%d/%m/%Y').strftime('%Y-%m-%d')

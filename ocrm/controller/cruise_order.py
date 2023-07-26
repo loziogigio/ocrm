@@ -22,8 +22,6 @@ def get_order(uuid, limit=20, time_laps=None):
         # Assuming 'uuid' is the unique ID of the cruise order
         cruise_order = frappe.get_doc("Cruise Order", {"uuid": uuid})
 
-        # Commit the changes
-        frappe.db.commit()
         return {
             "data": cruise_order
         }

@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-26 15:40:29.427375",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "flight_leg_number",
+  "flight_segment_number",
+  "departure_date",
+  "from_airport_code",
+  "from_airport_name",
+  "departure_time",
+  "to_airport_code",
+  "to_airport_name",
+  "arrival_date",
+  "arrival_time",
+  "airline_code",
+  "airline_name",
+  "flight_number",
+  "fare_class_code",
+  "cabin_class_description",
+  "flight_stop",
+  "flight_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "flight_leg_number",
+   "fieldtype": "Data",
+   "label": "Flight Leg Number "
+  },
+  {
+   "fieldname": "flight_segment_number",
+   "fieldtype": "Data",
+   "label": "Flight Segment Number"
+  },
+  {
+   "fieldname": "departure_date",
+   "fieldtype": "Date",
+   "label": "Departure Date"
+  },
+  {
+   "fieldname": "from_airport_code",
+   "fieldtype": "Data",
+   "label": "From Airport Code"
+  },
+  {
+   "fieldname": "from_airport_name",
+   "fieldtype": "Data",
+   "label": "From Airport Name"
+  },
+  {
+   "fieldname": "departure_time",
+   "fieldtype": "Data",
+   "label": "Departure Time"
+  },
+  {
+   "fieldname": "to_airport_code",
+   "fieldtype": "Data",
+   "label": "To Airport Code"
+  },
+  {
+   "fieldname": "to_airport_name",
+   "fieldtype": "Data",
+   "label": "To Airport Name"
+  },
+  {
+   "fieldname": "arrival_date",
+   "fieldtype": "Date",
+   "label": "Arrival Date"
+  },
+  {
+   "fieldname": "arrival_time",
+   "fieldtype": "Data",
+   "label": "Arrival Time"
+  },
+  {
+   "fieldname": "airline_code",
+   "fieldtype": "Data",
+   "label": "Airline Code"
+  },
+  {
+   "fieldname": "airline_name",
+   "fieldtype": "Data",
+   "label": "Airline Name"
+  },
+  {
+   "fieldname": "flight_number",
+   "fieldtype": "Data",
+   "label": "Flight Number"
+  },
+  {
+   "fieldname": "fare_class_code",
+   "fieldtype": "Data",
+   "label": "Fare Class Code"
+  },
+  {
+   "fieldname": "cabin_class_description",
+   "fieldtype": "Data",
+   "label": "Cabin Class Description"
+  },
+  {
+   "fieldname": "flight_stop",
+   "fieldtype": "Data",
+   "label": "Flight Stop"
+  },
+  {
+   "fieldname": "flight_type",
+   "fieldtype": "Data",
+   "label": "Flight Type"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-26 15:58:26.612050",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cruise Flight Detail",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

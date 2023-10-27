@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-10-19 19:03:43.858636",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cabin_name",
+  "price_type_name",
+  "available",
+  "price_total",
+  "select",
+  "cabin_code"
+ ],
+ "fields": [
+  {
+   "fieldname": "cabin_name",
+   "fieldtype": "Data",
+   "label": "Cabin Name"
+  },
+  {
+   "fieldname": "price_type_name",
+   "fieldtype": "Data",
+   "label": "Price Type Name"
+  },
+  {
+   "fieldname": "available",
+   "fieldtype": "Data",
+   "label": "Availability"
+  },
+  {
+   "fieldname": "price_total",
+   "fieldtype": "Data",
+   "label": "Price Total"
+  },
+  {
+   "fieldname": "select",
+   "fieldtype": "Button",
+   "label": "Select"
+  },
+  {
+   "fieldname": "cabin_code",
+   "fieldtype": "Data",
+   "label": "Cabin Code"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-24 03:48:53.285063",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Cabin Price List Child Table",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

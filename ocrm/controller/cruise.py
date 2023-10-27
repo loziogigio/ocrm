@@ -44,7 +44,8 @@ def get_companies_from_external_db(limit=20 , time_laps=None):
 
 @frappe.whitelist(allow_guest=True, methods=['GET'])
 def get_ships_from_external_db(limit=20 , time_laps=None):
-
+ 
+ 
     # Initialize the ShipRepository with the external DB connection string
     ship_repo = ShipRepository()
 

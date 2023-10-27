@@ -1,0 +1,43 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-10-17 18:30:26.264911",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "age"
+ ],
+ "fields": [
+  {
+   "fieldname": "age",
+   "fieldtype": "Int",
+   "label": "Age"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-10-17 19:02:11.519928",
+ "modified_by": "Administrator",
+ "module": "Ocrm",
+ "name": "Quotation Participants",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

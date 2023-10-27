@@ -83,6 +83,7 @@
   {
    "fieldname": "flight_detail",
    "fieldtype": "Long Text",
+   "hidden": 1,
    "label": "Flight Detail "
   },
   {
@@ -236,7 +237,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-26 15:42:38.304581",
+ "modified": "2023-07-26 20:18:58.986125",
  "modified_by": "Administrator",
  "module": "Ocrm",
  "name": "Cruise Order",

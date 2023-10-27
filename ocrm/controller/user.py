@@ -1,11 +1,27 @@
 import frappe
+import json
 from ocrm.repository.AddressReposiotory import AddressRepository
 from ocrm.repository.UserRepository import UserRepository
 from frappe.utils.password import update_password
 from ocrm.model.User import User
 from mymb_ecommerce.mymb_ecommerce.order import _create_address
+from frappe.utils.password import get_decrypted_password
+from ocrm.utils.APIClient import LaravelAPIService
+import requests
 
+def _get_ocrm_api_client():
+    laravel_service = LaravelAPIService()
 
+    # # Authenticate with the API
+    # try:
+    #     laravel_service.login_to_laravel('info@offerte-crociere.com', 'Cj6GqAJ9sPDy4CTZ')
+    #     print("Logged in successfully.")
+    # except requests.HTTPError as http_err:
+    #     print(f"HTTP error occurred: {http_err}")  # Handle HTTP errors
+    # except Exception as err:
+    #     print(f"An error occurred: {err}")  # Handle other errors (e.g., issues with data processing)
+    
+    return laravel_service
 
 @frappe.whitelist(allow_guest=True, methods=['GET'])
 def get_users_from_external_db(limit=20 , time_laps=None):
@@ -22,7 +38,70 @@ def get_users_from_external_db(limit=20 , time_laps=None):
         "data":external_users
     }
 
+@frappe.whitelist(allow_guest=True,methods=['GET'])
+def get_cruise_data_from_laravel_api(**kwargs):
+    """Fetch orders from the mymb_api_client using the provided kwargs."""
+    try:
+        service = _get_ocrm_api_client()
+        users = service.make_request('POST','/cruise/data')
 
+        if users:
+            return users
+        else:
+            return {"error": _("No users found with given code.")}
+        
+    except Exception as e:
+        # Handle exceptions and errors, and return a meaningful message
+        frappe.log_error(f"Error while fetching users: {e}", "Get users Error")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+    
+
+@frappe.whitelist(allow_guest=True,methods=['POST'])
+def get_cabin_price_list_from_laravel_api(**kwargs):
+    """Fetch orders from the mymb_api_client using the provided kwargs."""
+
+    try:
+        service = _get_ocrm_api_client()
+
+        users = service.make_request('POST', '/users/cabin_pricelist', data=kwargs)
+
+        if users:
+            return users
+        else:
+            return {"error": _("No users found with given code.")}
+        
+    except Exception as e:
+        # Handle exceptions and errors, and return a meaningful message
+        frappe.log_error(f"Error while fetching users: {e}", "Get users Error")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+@frappe.whitelist(allow_guest=True,methods=['POST'])
+def get_users_data_from_laravel_api(**kwargs):
+    """Fetch orders from the mymb_api_client using the provided kwargs."""
+    try:
+        service = _get_ocrm_api_client()
+        request_data = json.loads(frappe.request.data.decode())
+    
+        users = service.make_request('POST','/users/data', data=request_data)
+
+        if users:
+            return users
+        else:
+            return {"error": _("No users found with given code.")}
+        
+    except Exception as e:
+        # Handle exceptions and errors, and return a meaningful message
+        frappe.log_error(f"Error while fetching users: {e}", "Get users Error")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
 
 
 @frappe.whitelist(allow_guest=True, methods=['POST'])

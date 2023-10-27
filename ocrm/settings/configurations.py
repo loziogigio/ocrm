@@ -1,6 +1,6 @@
 import frappe
 from frappe import _
-from mymb_ecommerce.utils.database import Database
+from mymb_ecommerce.utils.Database import Database
 from frappe.utils.password import get_decrypted_password
 
 
